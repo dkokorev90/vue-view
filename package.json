@@ -1,0 +1,23 @@
+{
+  "name": "vue-view",
+  "version": "0.0.1",
+  "description": "vue.js router based on page.js",
+  "main": "src/index.js",
+  "scripts": {
+    "test": ""
+  },
+  "license": "MIT",
+  "dependencies": {
+    "page": "^1.6.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ayamflow/vue-route"
+  },
+  "keywords": [
+    "vue",
+    "router",
+    "view",
+    "pagejs"
+  ]
+}
