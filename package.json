@@ -3,21 +3,24 @@
   "version": "0.0.1",
   "description": "vue.js router based on page.js",
   "main": "src/index.js",
-  "scripts": {
-    "test": ""
-  },
+  "author": "Dmitry Kokorev <molforp@ya.ru>",
   "license": "MIT",
   "dependencies": {
-    "page": "^1.6.0"
+    "page": "^1.6.1",
+    "reverend": "^0.3.0",
+    "101": "*"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ayamflow/vue-route"
+    "url": "https://github.com/molfop/vue-view"
   },
   "keywords": [
     "vue",
+    "vuejs",
+    "route",
     "router",
     "view",
-    "pagejs"
+    "pagejs",
+    "plugin"
   ]
 }
