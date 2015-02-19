@@ -207,7 +207,19 @@ passed to `ctx` of `beforeEnter` and `onEnter` middleware. It is an object conta
 * `component`: the name of component associated to the current route
 * `query`: query string `age=24&someParam=0`
 * `queryParams`: a hash of the query params `{ age: 24, someParam: 0  }`
-* `state`: name of current state (if you use states)
+* `state`: name of the current state (if you use states)
+
+### $router
+`$router` parameter passed to current VM `$data` with some properties:
+* `params`: a hash of the params from the route
+* `queryParams`: a hash of the query params
+* `state`: name of the current state (if you use states)
+
+`$router` has method `isState(stateName)`, check if the current state is `stateName`, returns boolean.
+
+```js
+this.$data.$router.isState('home')
+```
 
 ## v-go directive
 
