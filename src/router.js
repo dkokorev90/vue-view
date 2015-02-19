@@ -27,8 +27,6 @@ module.exports = function(Vue, page, utils) {
         return path;
     }
 
-    Vue.page = page;
-
     return {
         init: function() {
             this._router = this.vm.$root.$options.router;
