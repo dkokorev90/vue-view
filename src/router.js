@@ -68,7 +68,7 @@ module.exports = function(Vue, page, utils) {
 
         _initStates: function() {
             var states = this._routesType = this._states;
-            this._defaultRoute = this._routesType[states.default].url;
+            this._defaultRoute = states.default ? this._routesType[states.default].url : null;
             delete states.default;
 
             Object.keys(states).forEach(function(name) {
@@ -177,6 +177,7 @@ module.exports = function(Vue, page, utils) {
                 this._location.component = component;
                 this._callHook('onEnter');
             }
+
         },
 
         _callHook: function(hook, next) {
@@ -200,7 +201,7 @@ module.exports = function(Vue, page, utils) {
             }, this);
 
             if (middleware) {
-                middleware.call(this, location, next);
+                middleware.call(root, location, next, this);
             } else if (next) {
                 next();
             }
