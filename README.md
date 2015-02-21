@@ -185,6 +185,36 @@ When you pass your routes to the `$root`, you can pass several properties:
   * `onEnter`: a callback (method or name of method on the vm) to call after route update
   * `beforeLeave`: a callback (method or name of method on the vm) to call before route leave
   * `data`: an object that will be **merged** with the view's `$data`. This is useful when we need to use the same component for different urls but using different data
+  * `wait`: must be `true`, if you want to wait for async data in your VM of some route. It tells the route
+ to use `wait-for` with `readyEvent` from global routes options (default: `dataLoaded`), for example:
+
+
+```js
+// route (state 'home')
+module.exports = {
+    url: '/home',
+    component: function(cb) {
+        require(['./home.js'], function(mod) {
+            cb(mod);
+        });
+    },
+    wait: true
+};
+
+// VM
+module.exports = {
+    name: 'home',
+    template: '<div>home</div>',
+    compiled: function() {
+        setTimeout(function() {
+            this.$data.someAsyncData = someAsyncData;
+
+            this.$emit('dataLoaded');
+        }.bind(this), 200);
+    }
+};
+
+```
 
 Also `routes` or `states` option has `default` property. Pass `default: <state>` or `default: <path>`,
  depending on what you use.
@@ -192,7 +222,9 @@ Also `routes` or `states` option has `default` property. Pass `default: <state>`
 ### Options
 
 You can pass a options hash to the router – it is a [page.js options](https://github.com/visionmedia/page.js#pageoptions),
-and own option: `activeClass` – using for class name of active state (default: `active`).
+and own options:
+ * `activeClass` – using for class name of active state (default: `active`)
+ * `readyEvent` – using for `wait-for` event, if route option `wait` equals `true` (default: `dataLoaded`)
 
 ### Events
 

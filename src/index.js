@@ -12,7 +12,7 @@ module.exports = function(Vue) {
 
     _.extend(router, component);
     _.extend(router, {
-        bind: function(argument) {
+        bind: function() {
             this._isDynamicLiteral = true;
 
             component.bind.call(this);
@@ -68,6 +68,18 @@ module.exports = function(Vue) {
 
                 return child;
             }
+        },
+
+        // if option "wait" passed to the route, wait for readyEvent emitted
+        update: function(value) {
+            if (this._routerData.wait === true) {
+                this.readyEvent = this._options.readyEvent || 'dataLoaded';
+            }
+
+            component.update.call(this, value);
+
+            // set readyEvent to null, because not every route can have "wait" option
+            this.readyEvent = null;
         }
     });
 
