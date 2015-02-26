@@ -29,7 +29,8 @@ module.exports = function(Vue, page, utils) {
 
     return {
         init: function() {
-            this._router = this.vm.$root.$options.router;
+            this._root = this.vm.$root;
+            this._router = this._root.$options.router;
             this._options = this._router.options || {};
 
             this._routes = this._router.routes;
@@ -162,7 +163,7 @@ module.exports = function(Vue, page, utils) {
 
         _updateRoute: function() {
             var component = this._routerData.component;
-            var components = this.vm.$options.components;
+            var components = this._root.$options.components;
 
             // for webpack
             if (utils.isFunction(component)) {
@@ -182,7 +183,7 @@ module.exports = function(Vue, page, utils) {
 
         _callHook: function(hook, next) {
             var callback = this._routerData[hook];
-            var root = this.vm.$root;
+            var root = this._root;
             var location = hook === 'beforeLeave' ? null : { to: this._location, from: this._oldLocation };
             var middleware;
 
