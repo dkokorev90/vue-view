@@ -13,6 +13,8 @@ module.exports = function(Vue, page, utils) {
             return;
         }
 
+        routeParams || (routeParams = {});
+
         var url = state.url;
         var path = reverend(url, routeParams);
 
@@ -51,7 +53,7 @@ module.exports = function(Vue, page, utils) {
 
         _initRoutes: function() {
             var routes = this._routesType = this._routes;
-            this._defaultRoute = routes.default;
+            this._defaultRoute = routes.default || null;
             delete routes.default;
 
             Object.keys(routes).forEach(function(route) {
@@ -69,7 +71,7 @@ module.exports = function(Vue, page, utils) {
 
         _initStates: function() {
             var states = this._routesType = this._states;
-            this._defaultRoute = states.default ? this._routesType[states.default].url : null;
+            this._defaultRoute = states.default || null;
             delete states.default;
 
             Object.keys(states).forEach(function(name) {
@@ -95,7 +97,7 @@ module.exports = function(Vue, page, utils) {
         _initDefaultRoute: function() {
             page('*', function() {
                 _.nextTick(function() {
-                    page.redirect(this._defaultRoute);
+                    Vue.redirect(this._defaultRoute);
                 }, this);
             }.bind(this));
         },
